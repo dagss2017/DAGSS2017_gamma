@@ -22,23 +22,23 @@
             <ui:define name="contenido">
                 <h:form id="formularioListado">     
                 <b:container fluid="true">
-                    <b:panel title="Listado de Citas para Hoy" collapsible="false">
+                    <b:panel title="Prescripciones" collapsible="false">
                         <b:dataTable id="tablaListado"  class="tablaListadoClass"
                                      value="#{GestionCitasControlador.citas}"
                                      var="citas" 
                                      page-length="5" page-length-menu="[5,10,20]">
-                            <b:dataTableColumn label="Paciente">
+                            <b:dataTableColumn label="Medicina">
                                 <h:outputText value="#{citas.paciente}"/>
                             </b:dataTableColumn>
-                            <b:dataTableColumn label="Hora">
+                            <b:dataTableColumn label="Dosis">
                                 <h:outputText value="#{citas.hora}" />
                             </b:dataTableColumn>                    
 
-                            <b:dataTableColumn label="Estado" orderable="false">
+                            <b:dataTableColumn label="Indicaciones" orderable="false">
                                 <h:outputText value="#{citas.estado}" />
                             </b:dataTableColumn>
 
-                            <b:dataTableColumn label="Ausente">
+                            <b:dataTableColumn label="Fecha Periodo">
                                 <b:commandButton id="botonAusente" />
                             </b:dataTableColumn>
                             
