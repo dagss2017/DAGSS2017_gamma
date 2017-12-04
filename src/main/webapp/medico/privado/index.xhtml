@@ -20,22 +20,24 @@
             </ui:define>
 
             <ui:define name="contenido">
-                <h:form id="formularioListado">     
+                <h:form id="formularioListadoCitas">     
                 <b:container fluid="true">
                     <b:panel title="Listado de Citas para Hoy" collapsible="false">
-                        <b:dataTable id="tablaListado"  class="tablaListadoClass"
-                                     value="#{GestionCitasControlador.citas}"
-                                     var="citas" 
+                        <b:dataTable id="tablaListadoCitas"  class="tablaListadoCitasClass"
+                                     value="#{GestionCitasActualesControlador.citas}"
+                                     var="cita" 
                                      page-length="5" page-length-menu="[5,10,20]">
+                             <b:dataTableColumn label="Id">
+                                <h:outputText value="#{cita.id}"/>
                             <b:dataTableColumn label="Paciente">
-                                <h:outputText value="#{citas.paciente}"/>
+                                <h:outputText value="#{cita.paciente}"/>
                             </b:dataTableColumn>
                             <b:dataTableColumn label="Hora">
-                                <h:outputText value="#{citas.hora}" />
+                                <h:outputText value="#{cita.hora}" />
                             </b:dataTableColumn>                    
 
                             <b:dataTableColumn label="Estado" orderable="false">
-                                <h:outputText value="#{citas.estado}" />
+                                <h:outputText value="#{cita.estado}" />
                             </b:dataTableColumn>
 
                             <b:dataTableColumn label="Ausente">
@@ -43,13 +45,13 @@
                             </b:dataTableColumn>
                             
                             <b:dataTableColumn label="Acciones" orderable="false">
-                                <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEditar(centroSalud)}" 
-                                                 update=":formularioEditar:modalEditar"
+                                <b:commandButton id="botonIrPrescripciones" icon-awesome="pencil" tooltip="Editar" ajax="true" 
+                                                 actionListener="#{GestionCitasActualesControlador.doPrescripciones(cita)}" 
+                                                 update=":formularioListadoP"
                                                  oncomplete="$('.modal-editar-class').modal('show')"/>
-                                <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEliminar(centroSalud)}"
-                                                 update="@(.tablaListadoClass)"/>
+                                <b:commandButton id="botonCompletar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
+                                                 actionListener="#{GestionCitasActualesControlador.doCompletado(cita)}"
+                                                 update="@(.tablaListadoCitasClass)"/>
                             </b:dataTableColumn>                            
                         </b:dataTable>
                     </b:panel>

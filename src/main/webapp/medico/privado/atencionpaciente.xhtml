@@ -20,41 +20,51 @@
             </ui:define>
 
             <ui:define name="contenido">
-                <h:form id="formularioListado">     
+                <h:form id="formularioListadoPrescripciones">
                 <b:container fluid="true">
                     <b:panel title="Prescripciones" collapsible="false">
-                        <b:dataTable id="tablaListado"  class="tablaListadoClass"
-                                     value="#{GestionCitasControlador.citas}"
-                                     var="citas" 
+                        <b:dataTable id="tablaListadoPrescripciones"  class="tablaListadoPrescripcionesClass"
+                                     value="#{GestionPrescripcionesControlador.prescripciones}"
+                                     var="prescripcion" 
                                      page-length="5" page-length-menu="[5,10,20]">
+                             <b:dataTableColumn label="Id">
+                                <h:outputText value="#{prescripcion.id}"/>
                             <b:dataTableColumn label="Medicina">
-                                <h:outputText value="#{citas.paciente}"/>
+                                <h:outputText value="#{prescripcion.medicina}"/>
                             </b:dataTableColumn>
                             <b:dataTableColumn label="Dosis">
-                                <h:outputText value="#{citas.hora}" />
+                                <h:outputText value="#{prescripcion.dosis}" />
                             </b:dataTableColumn>                    
 
                             <b:dataTableColumn label="Indicaciones" orderable="false">
-                                <h:outputText value="#{citas.estado}" />
+                                <h:outputText value="#{prescripcion.indicaciones}" />
                             </b:dataTableColumn>
 
-                            <b:dataTableColumn label="Fecha Periodo">
-                                <b:commandButton id="botonAusente" />
+                            <b:dataTableColumn label="Fecha Inicio">
+                                  <h:outputText value="#{prescripcion.fechaInicio}" />
                             </b:dataTableColumn>
-                            
-                            <b:dataTableColumn label="Acciones" orderable="false">
+                            <b:dataTableColumn label="Fecha Fin">
+                                  <h:outputText value="#{prescripcion.fechaInicio}" />
+                            </b:dataTableColumn> 
+                            <b:dataTableColumn label="" orderable="false">
                                 <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEditar(centroSalud)}" 
+                                                 actionListener="#{GestionPrescripcionesControlador.doEditar(prescripcion)}" 
                                                  update=":formularioEditar:modalEditar"
                                                  oncomplete="$('.modal-editar-class').modal('show')"/>
                                 <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEliminar(centroSalud)}"
-                                                 update="@(.tablaListadoClass)"/>
-                            </b:dataTableColumn>                            
+                                                 actionListener="#{GestionPrescripcionesControlador.doEliminar(prescripcion)}"
+                                                 update="@(.tablaListadoPrescripcionesClass)"/>
+                            </b:dataTableColumn>
                         </b:dataTable>
+                        <f:facet name="footer">
+                            <b:commandButton id="botonNueva" icon-awesome="plus" value="Crear Nueva Prescripcion" tooltip="Nuevo centro de salud" ajax="true"
+                                             actionListener="#{gestionCentrosSaludControlador.doNuevo()}" 
+                                             update=":formularioNuevaPrescripcion:modalNuevaPrescripcion"
+                                             oncomplete="$('.modal-nueva-prescripcion-class').modal('show')"/>
+                        </f:facet>
                     </b:panel>
                 </b:container>
-            </h:form>  
+                </h:form>
             </ui:define>
         </ui:composition>
 
