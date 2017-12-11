@@ -12,49 +12,42 @@
         <ui:composition template="/plantillas/plantillaComun.xhtml">
 
             <ui:define name="tituloPagina">
-                <h2>  Pagina principal de Médicos </h2>
+                <h2>  Plan de recetas </h2>
             </ui:define>            
 
             <ui:define name="menu">
                 <ui:include src="/plantillas/menuComun.xhtml"/>
             </ui:define>
 
-            <ui:define name="contenido">
-                <h:form id="formularioListado">     
+            <ui:define name="contenido">    
                 <b:container fluid="true">
-                    <b:panel title="Listado de Citas para Hoy" collapsible="false">
-                        <b:dataTable id="tablaListado"  class="tablaListadoClass"
-                                     value="#{GestionCitasControlador.citas}"
-                                     var="citas" 
+                    <b:panel title="Plan de Recetas" collapsible="false">
+                       <b:dataTable id="tablaListadoPrescripciones"  class="tablaListadoPrescripcionesClass"
+                                     value="#{GestionPrescripcionesControlador.prescripciones}"
+                                     var="prescripcion" 
                                      page-length="5" page-length-menu="[5,10,20]">
-                            <b:dataTableColumn label="Paciente">
-                                <h:outputText value="#{citas.paciente}"/>
+                             <b:dataTableColumn label="Id">
+                                <h:outputText value="#{prescripcion.id}"/>
+                            <b:dataTableColumn label="Medicina">
+                                <h:outputText value="#{prescripcion.medicina}"/>
                             </b:dataTableColumn>
-                            <b:dataTableColumn label="Hora">
-                                <h:outputText value="#{citas.hora}" />
+                            <b:dataTableColumn label="Dosis">
+                                <h:outputText value="#{prescripcion.dosis}" />
                             </b:dataTableColumn>                    
 
-                            <b:dataTableColumn label="Estado" orderable="false">
-                                <h:outputText value="#{citas.estado}" />
+                            <b:dataTableColumn label="Indicaciones" orderable="false">
+                                <h:outputText value="#{prescripcion.indicaciones}" />
                             </b:dataTableColumn>
 
-                            <b:dataTableColumn label="Ausente">
-                                <b:commandButton id="botonAusente" />
+                            <b:dataTableColumn label="Fecha Inicio">
+                                  <h:outputText value="#{prescripcion.fechaInicio}" />
                             </b:dataTableColumn>
-                            
-                            <b:dataTableColumn label="Acciones" orderable="false">
-                                <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEditar(centroSalud)}" 
-                                                 update=":formularioEditar:modalEditar"
-                                                 oncomplete="$('.modal-editar-class').modal('show')"/>
-                                <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
-                                                 actionListener="#{gestionCentrosSaludControlador.doEliminar(centroSalud)}"
-                                                 update="@(.tablaListadoClass)"/>
-                            </b:dataTableColumn>                            
+                            <b:dataTableColumn label="Fecha Fin">
+                                  <h:outputText value="#{prescripcion.fechaInicio}" />
+                            </b:dataTableColumn>               
                         </b:dataTable>
                     </b:panel>
-                </b:container>
-            </h:form>  
+                </b:container> 
             </ui:define>
         </ui:composition>
 
