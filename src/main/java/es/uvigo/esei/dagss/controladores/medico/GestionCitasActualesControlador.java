@@ -68,11 +68,7 @@ public class GestionCitasActualesControlador implements Serializable {
     }
 
     public List<Paciente> getListadoPacientes() {
-        return pacienteDAO.buscarTodos();
-    }
-
-    public List<Medico> getListadoMedicos() {
-        return medicoDAO.buscarTodos();
+        return pacienteDAO.buscarPorMedico();
     }
     
     

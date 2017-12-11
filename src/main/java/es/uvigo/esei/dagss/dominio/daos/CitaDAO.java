@@ -14,4 +14,5 @@ import javax.ejb.Stateless;
 public class CitaDAO  extends GenericoDAO<Cita>{    
 
     // Completar aqui
+    
 }
