@@ -54,10 +54,5 @@ public class PacienteDAO extends GenericoDAO<Paciente> {
 
     // Completar aqui
     
-    public List<Paciente> buscarPorMedico(String medicoid) {
-        TypedQuery<Paciente> q = em.createQuery("SELECT p FROM Paciente AS p "
-                                              + "  WHERE p.medico_id LIKE :patron", Paciente.class);
-        q.setParameter("patron","%"+medicoid+"%");        
-        return q.getResultList();
-    }
+    
 }

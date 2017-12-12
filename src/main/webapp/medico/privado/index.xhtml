@@ -24,33 +24,33 @@
                 <b:container fluid="true">
                     <b:panel title="Listado de Citas para Hoy" collapsible="false">
                         <b:dataTable id="tablaListadoCitas"  class="tablaListadoCitasClass"
-                                     value="#{GestionCitasActualesControlador.citas}"
+                                     value="#{gestionCitasActualesControlador.citas}"
                                      var="cita" 
                                      page-length="5" page-length-menu="[5,10,20]">
                              <b:dataTableColumn label="Id">
                                 <h:outputText value="#{cita.id}"/>
+                            </b:dataTableColumn>  
                             <b:dataTableColumn label="Paciente">
-                                <h:outputText value="#{cita.paciente}"/>
+                                <h:outputText value="#{cita.paciente.nombre} #{cita.paciente.apellidos} "/>
                             </b:dataTableColumn>
                             <b:dataTableColumn label="Hora">
-                                <h:outputText value="#{cita.hora}" />
-                            </b:dataTableColumn>                    
+                                <h:outputText value="#{cita.hora}" >
+                                    <f:convertDateTime pattern="hh:mm" locale="es_ES" timeZone="Europe/Madrid"/>
+                                </h:outputText>
+                            </b:dataTableColumn>                  
 
                             <b:dataTableColumn label="Estado" orderable="false">
                                 <h:outputText value="#{cita.estado}" />
                             </b:dataTableColumn>
-
-                            <b:dataTableColumn label="Ausente">
-                                <b:commandButton id="botonAusente" />
-                            </b:dataTableColumn>
-                            
                             <b:dataTableColumn label="Acciones" orderable="false">
-                                <b:commandButton id="botonIrPrescripciones" icon-awesome="pencil" tooltip="Editar" ajax="true" 
-                                                 actionListener="#{GestionCitasActualesControlador.doPrescripciones(cita)}" 
-                                                 update=":formularioListadoP"
-                                                 oncomplete="$('.modal-editar-class').modal('show')"/>
-                                <b:commandButton id="botonCompletar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
-                                                 actionListener="#{GestionCitasActualesControlador.doCompletado(cita)}"
+                                 <b:commandButton id="botonAusente" icon-rotate="l" icon-awesome="thumbs-up" tooltip="Confirmar Ausencia" ajax="true" 
+                                                 actionListener="#{gestionCitasActualesControlador.doAusencia(cita)}" 
+                                                 update=":formularioListadoCitas" />
+                                <b:commandButton id="botonIrPrescripciones" icon-awesome="bar-chart" tooltip="Atencion Al Paciente" ajax="true" 
+                                                 actionListener="#{gestionCitasActualesControlador.doPrescripciones(cita)}" 
+                                                 update=":formularioListadoCitas" />
+                                <b:commandButton id="botonCompletar" icon-awesome="thumbs-up" tooltip="Completar Cita" ajax="true" 
+                                                 actionListener="#{gestionCitasActualesControlador.doCompletado(cita)}"
                                                  update="@(.tablaListadoCitasClass)"/>
                             </b:dataTableColumn>                            
                         </b:dataTable>
@@ -59,6 +59,5 @@
             </h:form>  
             </ui:define>
         </ui:composition>
-
     </body>
 </html>

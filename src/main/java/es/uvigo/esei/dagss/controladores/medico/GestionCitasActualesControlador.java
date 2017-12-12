@@ -42,6 +42,10 @@ public class GestionCitasActualesControlador implements Serializable {
     @Inject
     PacienteDAO pacienteDAO;
 
+    
+    @Inject
+    MedicoControlador medicoControlador;
+    
     List<Cita> citas;
 
     public GestionCitasActualesControlador() {
@@ -49,7 +53,7 @@ public class GestionCitasActualesControlador implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        citas = citaDAO.buscarTodos();
+        citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId());
     }
 
     /*
@@ -65,10 +69,6 @@ public class GestionCitasActualesControlador implements Serializable {
 
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
-    }
-
-    public List<Paciente> getListadoPacientes() {
-        return pacienteDAO.buscarPorMedico();
     }
     
     
