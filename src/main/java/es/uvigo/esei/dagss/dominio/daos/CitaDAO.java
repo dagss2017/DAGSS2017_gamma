@@ -22,4 +22,6 @@ public class CitaDAO  extends GenericoDAO<Cita>{
         q.setParameter("id",medicoid);        
         return q.getResultList();
     }
+    
+    
 }

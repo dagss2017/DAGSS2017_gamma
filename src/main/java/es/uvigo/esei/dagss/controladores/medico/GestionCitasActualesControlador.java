@@ -71,6 +71,19 @@ public class GestionCitasActualesControlador implements Serializable {
         this.citas = citas;
     }
     
+    public void doCompletado(Cita cita) {
+        System.out.println(">>> llama a completar con "+cita);
+        citaDAO.completar(cita);
+        //Actualizar lista de citas con el médico en sesión
+        citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
+    }
+    
+    public void doAusente(Cita cita) {
+        System.out.println(">>> llama a ausentar con "+cita);
+        citaDAO.ausentar(cita);
+        //Actualizar lista de citas con el médico en sesión
+        citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
+    }
     
 
     public String doVolver() {
