@@ -29,6 +29,7 @@ public class CitaDAO  extends GenericoDAO<Cita>{
         return q.getResultList();
     }
     
+    
     public void completar(Cita cita){
         TypedQuery<Cita> q = em.createQuery("UPDATE Cita"
                                             +"SET estado = 'COMPLETADA'"
