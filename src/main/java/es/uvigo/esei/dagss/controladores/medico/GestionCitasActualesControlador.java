@@ -47,8 +47,6 @@ public class GestionCitasActualesControlador implements Serializable {
     MedicoControlador medicoControlador;
     
     List<Cita> citas;
-    List<Cita> citasAusentes;
-    List<Cita> citasCompletadas;
 
     public GestionCitasActualesControlador() {
     }
@@ -56,8 +54,6 @@ public class GestionCitasActualesControlador implements Serializable {
     @PostConstruct
     public void inicializar() {
         citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId());
-        citasAusentes = citaDAO.buscarAusentes(medicoControlador.getMedicoActual().getId());
-        citasCompletadas = citaDAO.buscarCompletadas(medicoControlador.getMedicoActual().getId());
     }
 
     /*
@@ -75,22 +71,7 @@ public class GestionCitasActualesControlador implements Serializable {
         this.citas = citas;
     }
     
-    public List<Cita> getCitasAusentes() {
-        return citasAusentes;
-    }
-    
-    public void setCitasAusentes(List<Cita> citas) {
-        this.citas = citas;
-    }
-    
-    public List<Cita> getCitasCompletadas() {
-        return citasAusentes;
-    }
-    
-    public void setCitasCompletadas(List<Cita> citas) {
-        this.citas = citas;
-    }
-    
+    /*
     public void doCompletado(Cita cita) {
         System.out.println(">>> llama a completar con "+cita);
         citaDAO.completar(cita);
@@ -104,7 +85,7 @@ public class GestionCitasActualesControlador implements Serializable {
         //Actualizar lista de citas con el médico en sesión
         citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
     }
-    
+    */
 
     public String doVolver() {
         return "../index?faces-redirect=true";

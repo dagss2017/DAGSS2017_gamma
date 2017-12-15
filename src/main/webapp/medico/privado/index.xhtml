@@ -57,46 +57,6 @@
                     </b:panel>
                 </b:container>
             </h:form>
-                 <b:container fluid="true">
-                    <b:panel title="Citas Completadas" collapsible="false">
-                        <b:dataTable id="tablaCitasCompletadas"  class="tablaCitasCompletadasClass"
-                                     value="#{gestionCitasActualesControlador.citasCompletadas}"
-                                     var="citac" 
-                                     page-length="5" page-length-menu="[5,10,20]">
-                             <b:dataTableColumn label="Id">
-                                <h:outputText value="#{citac.id}"/>
-                            </b:dataTableColumn>  
-                            <b:dataTableColumn label="Paciente">
-                                <h:outputText value="#{citac.paciente.nombre} #{citac.paciente.apellidos} "/>
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="Hora">
-                                <h:outputText value="#{citac.hora}" >
-                                    <f:convertDateTime pattern="hh:mm" locale="es_ES" timeZone="Europe/Madrid"/>
-                                </h:outputText>
-                            </b:dataTableColumn>                                  
-                        </b:dataTable>
-                    </b:panel>
-                </b:container>
-                 <b:container fluid="true">
-                    <b:panel title="Ausentes" collapsible="false">
-                        <b:dataTable id="tablaCitasAusentes"  class="tablaCitasAusentesClass"
-                                     value="#{gestionCitasActualesControlador.citasCompletadas}"
-                                     var="citaa" 
-                                     page-length="5" page-length-menu="[5,10,20]">
-                             <b:dataTableColumn label="Id">
-                                <h:outputText value="#{citaa.id}"/>
-                            </b:dataTableColumn>  
-                            <b:dataTableColumn label="Paciente">
-                                <h:outputText value="#{citaa.paciente.nombre} #{citaa.paciente.apellidos} "/>
-                            </b:dataTableColumn>
-                            <b:dataTableColumn label="Hora">
-                                <h:outputText value="#{citaa.hora}" >
-                                    <f:convertDateTime pattern="hh:mm" locale="es_ES" timeZone="Europe/Madrid"/>
-                                </h:outputText>
-                            </b:dataTableColumn>                                  
-                        </b:dataTable>
-                    </b:panel>
-                </b:container>
             </ui:define>
         </ui:composition>
     </body>
