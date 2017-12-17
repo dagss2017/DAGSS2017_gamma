@@ -47,6 +47,8 @@ public class GestionCitasActualesControlador implements Serializable {
     MedicoControlador medicoControlador;
     
     List<Cita> citas;
+    
+    Cita citaActual;
 
     public GestionCitasActualesControlador() {
     }
@@ -71,22 +73,27 @@ public class GestionCitasActualesControlador implements Serializable {
         this.citas = citas;
     }
     
-    /*
+    public Cita getCitaActual() {
+        return citaActual;
+    }
+
+    public void setCitaActual(Cita citaActual) {
+        this.citaActual = citaActual;
+    }
+    
     public void doCompletado(Cita cita) {
         System.out.println(">>> llama a completar con "+cita);
-        citaDAO.completar(cita);
+        citaActual = citaDAO.completar(cita);
         //Actualizar lista de citas con el médico en sesión
         citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
     }
     
     public void doAusente(Cita cita) {
         System.out.println(">>> llama a ausentar con "+cita);
-        citaDAO.ausentar(cita);
+        citaActual= citaDAO.ausentar(cita);
         //Actualizar lista de citas con el médico en sesión
         citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
     }
-    */
-
     public String doVolver() {
         return "../index?faces-redirect=true";
     }

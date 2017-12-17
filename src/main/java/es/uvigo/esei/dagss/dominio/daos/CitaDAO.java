@@ -5,6 +5,7 @@
 package es.uvigo.esei.dagss.dominio.daos;
 
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
+import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,34 +14,31 @@ import javax.persistence.TypedQuery;
 
 @Stateless
 @LocalBean
+
 public class CitaDAO  extends GenericoDAO<Cita>{    
 
     // Completar aqui
     public List<Cita> buscarPorMedico(Long medicoid) {
-        String patronUno = "AUSENTE";
-        String patronDos = "COMPLETADA";
+        EstadoCita patronUno = EstadoCita.AUSENTE;
+        EstadoCita patronDos = EstadoCita.COMPLETADA;
         TypedQuery<Cita> q = em.createQuery("SELECT c FROM Cita AS c "
-                                              + "  WHERE c.medico.id = :id"
-                                               + "AND (c.estado NOT LIKE :patronUno) AND "
-                                              + " (c.estado NOT LIKE :patronDos)", Cita.class);
-        q.setParameter("id",medicoid);
-        q.setParameter("patronUno","%"+patronUno+"%");
-        q.setParameter("patronDos","%"+patronDos+"%");
+                + "  WHERE c.medico.id = :id"
+                + "  AND (c.estado != :patronUno)"
+                + "  AND (c.estado != :patronDos)", Cita.class);
+        q.setParameter("id", medicoid);
+        q.setParameter("patronUno", patronUno);
+        q.setParameter("patronDos", patronDos);
         return q.getResultList();
     }
     
     
-    public void completar(Cita cita){
-        TypedQuery<Cita> q = em.createQuery("UPDATE Cita"
-                                            +"SET estado = 'COMPLETADA'"
-                                            +"WHERE :patron", Cita.class);
-        q.setParameter("patron",cita.getId());
+    public Cita completar(Cita cita){
+        cita.setEstado(EstadoCita.COMPLETADA);
+        return em.merge(cita);
     }
-    
-    public void ausentar(Cita cita){
-        TypedQuery<Cita> q = em.createQuery("UPDATE Cita"
-                                            +"SET estado = 'AUSENTE'"
-                                            +"WHERE :patron", Cita.class);
-        q.setParameter("patron",cita.getId());
+
+    public Cita ausentar(Cita cita){
+         cita.setEstado(EstadoCita.AUSENTE);
+         return em.merge(cita);
     }
 }
