@@ -12,7 +12,8 @@
         <ui:composition template="/plantillas/plantillaComun.xhtml">
 
             <ui:define name="tituloPagina">
-                <h2>  Pagina Atencion Al Paciente </h2>
+                <h2>  Pagina Atencion Al Paciente</h2>
+                <h3> #{gestionCitasActualesControlador.citaActual.paciente.nombre} #{gestionCitasActualesControlador.citaActual.paciente.apellidos}</h3>
             </ui:define>            
 
             <ui:define name="menu">
@@ -29,6 +30,7 @@
                                      page-length="5" page-length-menu="[5,10,20]">
                              <b:dataTableColumn label="Id">
                                 <h:outputText value="#{prescripcion.id}"/>
+                             </b:dataTableColumn>
                             <b:dataTableColumn label="Medicina">
                                 <h:outputText value="#{prescripcion.medicina}"/>
                             </b:dataTableColumn>
@@ -50,7 +52,7 @@
                                 <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEditar(prescripcion)}" 
                                                  update=":formularioEditar:modalEditar"
-                                                 oncomplete="$('.modal-editar-class').modal('show')"/>
+                                                 oncomplete="$('.modal-editarprescripcion-class').modal('show')"/>
                                 <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEliminar(prescripcion)}"
                                                  update="@(.tablaListadoPrescripcionesClass)"/>
@@ -58,7 +60,7 @@
                         </b:dataTable>
                         <f:facet name="footer">
                             <b:commandButton id="botonNueva" icon-awesome="plus" value="Crear Nueva Prescripcion" tooltip="Nuevo centro de salud" ajax="true"
-                                             actionListener="#{gestionCentrosSaludControlador.doNuevo()}" 
+                                             actionListener="#{GestionPrescripcionesControlador.doNuevo()}" 
                                              update=":formularioNuevaPrescripcion:modalNuevaPrescripcion"
                                              oncomplete="$('.modal-nueva-prescripcion-class').modal('show')"/>
                         </f:facet>

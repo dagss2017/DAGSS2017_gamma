@@ -94,10 +94,10 @@ public class GestionCitasActualesControlador implements Serializable {
         //Actualizar lista de citas con el médico en sesión
         citas = citaDAO.buscarPorMedico(medicoControlador.getMedicoActual().getId()); 
     }
-    public void doPrescripciones(Cita cita) {
+    public String doPrescripciones(Cita cita) {
         citaActual= cita;
         //Redireccionar a atención al paciente
-        
+        return "atencionpaciente?faces-redirect=true"; 
     }
     public String doVolver() {
         return "../index?faces-redirect=true";

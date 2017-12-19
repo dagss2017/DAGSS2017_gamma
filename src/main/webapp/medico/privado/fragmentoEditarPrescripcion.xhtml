@@ -9,26 +9,26 @@
     <ui:composition>
         <h:form id="formularioEditarPrescripcion">
             <b:modal id="modalEditarPrescripcion" class="modal-editarprescripcion-class" title="Editar Centro de Salud">
-                <b:panel title="Editar Prescripcion ID. #{gestionPrescripcionesControlador.prescripcionActual.id}" 
-                         rendered="#{not empty gestionPrescripcionesControlador.prescripcionActual}" 
+                <b:panel title="Editar Prescripcion ID. #{GestionPrescripcionesControlador.prescripcionActual.id}" 
+                         rendered="#{not empty GestionPrescripcionesControlador.prescripcionActual}" 
                          collapsible="false">
                     <h:outputLabel value="Medicamento" for="medicamento"/>
-                    <b:inputText id="nombre" value="#{gestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
+                    <b:inputText id="nombre" value="#{GestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
 
                     <h:outputLabel value="Dosis" for="dosis"/>
-                    <b:inputText id="domicilio" value="#{gestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
+                    <b:inputText id="domicilio" value="#{GestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
 
                     <h:outputLabel value="Indicaciones" for="indicaciones"/>
-                    <b:inputText id="localidad" value="#{gestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
+                    <b:inputText id="localidad" value="#{GestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
 
                     <h:outputLabel value="Fecha Fin" for="fechaFin"/>
-                    <b:inputText id="codpostal" value="#{gestionPrescripcionesControlador.prescripcionActual.fechaFin}" required="true"/>
+                    <b:inputText id="codpostal" value="#{GestionPrescripcionesControlador.prescripcionActual.fechaFin}" required="true"/>
 
                 </b:panel>
                 <f:facet name="footer">
                     <b:commandButton value="Guardar Prescripción" 
-                                     ajax="true" process="@form" update=":formularioListado:tablaListado :mensajesGlobal" 
-                                     actionListener="#{gestionPrescripciones.doGuardarEditado()}"  
+                                     ajax="true" process="@form" update=":formularioListadoPrescripciones:tablaListadoPrescripciones :mensajesGlobal" 
+                                     actionListener="#{GestionPrescripciones.doGuardarEditado()}"  
                                      oncomplete="$('.modal-editarprescripcion-class').modal('hide')"/>
                     <b:button value="Cerrar" dismiss="modal"/>
                 </f:facet>

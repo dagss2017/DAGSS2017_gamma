@@ -21,7 +21,9 @@ import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -61,7 +63,7 @@ public class GestionPrescripcionesControlador implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.citaActual.getPaciente().getId());
+        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
     }
     
     public List<Prescripcion> getPrescripciones() {
@@ -78,5 +80,17 @@ public class GestionPrescripcionesControlador implements Serializable {
 
     public void setPrescripcionActual(Prescripcion prescripcionActual) {
         this.prescripcionActual = prescripcionActual;
+    }
+    
+    public void doNuevo() {
+        prescripcionActual = new Prescripcion(); // Crear prescripción vacía
+        // Añadir paciente a la nueva prescripción
+        prescripcionActual.setPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente());
+        prescripcionActual.setFechaInicio(Calendar.getInstance().getTime());
+        
+    }
+    
+    public void doEditar(Prescripcion prescripcion) {
+        prescripcionActual = prescripcion;   // Otra alternativa: volver a refrescarlos desde el DAO
     }
 }

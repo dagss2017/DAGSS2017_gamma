@@ -45,12 +45,12 @@
                             <b:dataTableColumn label="Acciones" orderable="false" >
                                  <b:commandButton id="botonAusente" icon-rotate="l" icon-awesome="thumbs-up" tooltip="Confirmar Ausencia" ajax="true" 
                                                  actionListener="#{gestionCitasActualesControlador.doAusente(cita)}" 
-                                                 update=":formularioListadoCitas" />
-                                <b:commandButton id="botonIrPrescripciones" icon-awesome="bar-chart" tooltip="Atencion Al Paciente" ajax="true" 
-                                                 actionListener="#{gestionCitasActualesControlador.doPrescripciones(cita)}" 
-                                                 update=":formularioListadoCitas" />
+                                                 update="@(.tablaListadoCitasClass)" />
                                 <b:commandButton id="botonCompletar" icon-awesome="thumbs-up" tooltip="Completar Cita" ajax="true" 
                                                  actionListener="#{gestionCitasActualesControlador.doCompletado(cita)}"
+                                                 update="@(.tablaListadoCitasClass)"/>
+                                <b:commandButton id="botonIrPrescripciones" icon-awesome="bar-chart" tooltip="Atencion Al Paciente" ajax="true" 
+                                                 action="#{gestionCitasActualesControlador.doPrescripciones(cita)}" 
                                                  update="@(.tablaListadoCitasClass)"/>
                             </b:dataTableColumn>                            
                         </b:dataTable>

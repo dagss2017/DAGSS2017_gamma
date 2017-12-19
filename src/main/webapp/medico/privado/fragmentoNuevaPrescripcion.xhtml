@@ -1,9 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,18 +7,18 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui">
     <ui:composition>
         <h:form id="formularioNuevaPrescripcion">
-            <b:modal id="modalNuevaPrescripcion" class="modal-nueva-prescripcion-class" title="Crear Cita 'manual'">
-                <b:panel title="Crear Prescripcion 'manual'" 
-                         rendered="#{not empty gestionPrescripcionesControlador.prescripcionActual}" 
+            <b:modal id="modalNuevaPrescripcion" class="modal-nueva-prescripcion-class" title="Nueva Prescripción">
+                <b:panel title="Crear Prescripcion" 
+                         rendered="#{not empty GestionPrescripcionesControlador.prescripcionActual}" 
                          collapsible="false">
                     <h:outputLabel value="Medicamento" for="medicamento"/>
-                    <b:inputText id="nombre" value="#{gestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
+                    <b:inputText id="nombre" value="#{GestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
 
                     <h:outputLabel value="Dosis" for="dosis"/>
-                    <b:inputText id="domicilio" value="#{gestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
+                    <b:inputText id="domicilio" value="#{GestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
 
                     <h:outputLabel value="Indicaciones" for="indicaciones"/>
-                    <b:inputText id="localidad" value="#{gestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
+                    <b:inputText id="localidad" value="#{GestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
 
                     <h:outputLabel value="Fecha Fin" for="fechaFin"/>
                     <b:inputText id="codpostal" value="#{gestionPrescripcionesControlador.prescripcionActual.fechaFin}" required="true"/>
@@ -33,7 +27,7 @@ and open the template in the editor.
                 <f:facet name="footer">
                     <b:commandButton value="Crear Prescripción" 
                                      ajax="true" process="@form" update=":formularioListadoPrescripciones:tablaListadoPrescripciones :mensajesGlobal" 
-                                     actionListener="#{gestionPrescripcionesControlador.doGuardarNuevo()}"  
+                                     actionListener="#{GestionPrescripcionesControlador.doGuardarNuevo()}"  
                                      oncomplete="$('.modal-nueva-prescripcion-class').modal('hide')"/>
                     <b:button value="Cerrar" dismiss="modal"/>
                 </f:facet>
