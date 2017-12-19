@@ -19,15 +19,9 @@ public class CitaDAO  extends GenericoDAO<Cita>{
 
     // Completar aqui
     public List<Cita> buscarPorMedico(Long medicoid) {
-        EstadoCita patronUno = EstadoCita.AUSENTE;
-        EstadoCita patronDos = EstadoCita.COMPLETADA;
         TypedQuery<Cita> q = em.createQuery("SELECT c FROM Cita AS c "
-                + "  WHERE c.medico.id = :id"
-                + "  AND (c.estado != :patronUno)"
-                + "  AND (c.estado != :patronDos)", Cita.class);
+                + "  WHERE c.medico.id = :id", Cita.class);
         q.setParameter("id", medicoid);
-        q.setParameter("patronUno", patronUno);
-        q.setParameter("patronDos", patronDos);
         return q.getResultList();
     }
     

@@ -42,7 +42,7 @@
                             <b:dataTableColumn label="Estado" orderable="false">
                                 <h:outputText value="#{cita.estado}" />
                             </b:dataTableColumn>
-                            <b:dataTableColumn label="Acciones" orderable="false">
+                            <b:dataTableColumn label="Acciones" orderable="false" >
                                  <b:commandButton id="botonAusente" icon-rotate="l" icon-awesome="thumbs-up" tooltip="Confirmar Ausencia" ajax="true" 
                                                  actionListener="#{gestionCitasActualesControlador.doAusente(cita)}" 
                                                  update=":formularioListadoCitas" />
