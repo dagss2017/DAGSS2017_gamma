@@ -30,4 +30,5 @@ public class PrescripcionDAO extends GenericoDAO<Prescripcion> {
         q.setParameter("id", pacienteid);
         return q.getResultList();
     }
+    //Crear, modificar e eliminar prescripción se hacen en GenericoDAO
 }

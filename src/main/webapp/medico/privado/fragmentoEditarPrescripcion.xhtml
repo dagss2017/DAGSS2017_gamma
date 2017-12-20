@@ -13,16 +13,16 @@
                          rendered="#{not empty GestionPrescripcionesControlador.prescripcionActual}" 
                          collapsible="false">
                     <h:outputLabel value="Medicamento" for="medicamento"/>
-                    <b:inputText id="nombre" value="#{GestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
+                    <b:inputText id="medicamento" value="#{GestionPrescripcionesControlador.prescripcionActual.medicamento}" required="true"/>
 
                     <h:outputLabel value="Dosis" for="dosis"/>
-                    <b:inputText id="domicilio" value="#{GestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
+                    <b:inputText id="dosis" value="#{GestionPrescripcionesControlador.prescripcionActual.dosis}" required="true"/>
 
                     <h:outputLabel value="Indicaciones" for="indicaciones"/>
-                    <b:inputText id="localidad" value="#{GestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
+                    <b:inputText id="indicaciones" value="#{GestionPrescripcionesControlador.prescripcionActual.indicaciones}" required="true"/>
 
                     <h:outputLabel value="Fecha Fin" for="fechaFin"/>
-                    <b:inputText id="codpostal" value="#{GestionPrescripcionesControlador.prescripcionActual.fechaFin}" required="true"/>
+                    <b:inputText id="fechafin" value="#{GestionPrescripcionesControlador.prescripcionActual.fechaFin}" required="true"/>
 
                 </b:panel>
                 <f:facet name="footer">

@@ -9,6 +9,7 @@ package es.uvigo.esei.dagss.controladores.medico;
  * @author canro
  */
 
+import es.uvigo.esei.dagss.controladores.administrador.GestionMedicamentosControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
@@ -48,6 +49,8 @@ public class GestionPrescripcionesControlador implements Serializable {
     @Inject 
     PrescripcionDAO prescripcionDAO;
 
+    @Inject
+    GestionMedicamentosControlador medicamentosControlador;
     
     @Inject
     MedicoControlador medicoControlador;
@@ -86,11 +89,34 @@ public class GestionPrescripcionesControlador implements Serializable {
         prescripcionActual = new Prescripcion(); // Crear prescripción vacía
         // Añadir paciente a la nueva prescripción
         prescripcionActual.setPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente());
+        //Añadir fecha actual a la fecha de inicio de la nueva prescripción
         prescripcionActual.setFechaInicio(Calendar.getInstance().getTime());
-        
+        //Añadir médico
+        prescripcionActual.setMedico(medicoControlador.getMedicoActual());
     }
     
     public void doEditar(Prescripcion prescripcion) {
         prescripcionActual = prescripcion;   // Otra alternativa: volver a refrescarlos desde el DAO
+    }
+    
+    public void doEliminar(Prescripcion prescripcion) {
+        prescripcionDAO.eliminar(prescripcion);
+        // Actualiza lista de prescripciones del paciente actual
+        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
+    }
+    
+    public void doGuardarNuevo() {
+        // Crea una nueva prescripción
+        prescripcionActual = prescripcionDAO.crear(prescripcionActual);
+        // Actualiza lista de prescripciones del paciente actual
+        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
+
+    }
+    
+    public void doGuardarEditado() {
+          // Actualiza una prescripción
+        prescripcionActual = prescripcionDAO.actualizar(prescripcionActual);
+         // Actualiza lista de prescripciones del paciente actual
+        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
     }
 }

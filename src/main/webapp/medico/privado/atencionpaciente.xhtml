@@ -49,17 +49,17 @@
                                   <h:outputText value="#{prescripcion.fechaInicio}" />
                             </b:dataTableColumn> 
                             <b:dataTableColumn label="" orderable="false">
-                                <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar" ajax="true" 
+                                <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar prescripción" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEditar(prescripcion)}" 
                                                  update=":formularioEditar:modalEditar"
                                                  oncomplete="$('.modal-editarprescripcion-class').modal('show')"/>
-                                <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar" ajax="true" 
+                                <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar prescripción" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEliminar(prescripcion)}"
                                                  update="@(.tablaListadoPrescripcionesClass)"/>
                             </b:dataTableColumn>
                         </b:dataTable>
                         <f:facet name="footer">
-                            <b:commandButton id="botonNueva" icon-awesome="plus" value="Crear Nueva Prescripcion" tooltip="Nuevo centro de salud" ajax="true"
+                            <b:commandButton id="botonNueva" icon-awesome="plus" value="Crear Nueva Prescripcion" tooltip="Nueva prescripción" ajax="true"
                                              actionListener="#{GestionPrescripcionesControlador.doNuevo()}" 
                                              update=":formularioNuevaPrescripcion:modalNuevaPrescripcion"
                                              oncomplete="$('.modal-nueva-prescripcion-class').modal('show')"/>
