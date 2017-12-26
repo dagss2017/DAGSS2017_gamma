@@ -11,21 +11,26 @@ package es.uvigo.esei.dagss.controladores.medico;
 
 import es.uvigo.esei.dagss.controladores.administrador.GestionMedicamentosControlador;
 import es.uvigo.esei.dagss.dominio.daos.CitaDAO;
+import es.uvigo.esei.dagss.dominio.daos.MedicamentoDAO;
 import es.uvigo.esei.dagss.dominio.daos.MedicoDAO;
 import es.uvigo.esei.dagss.dominio.daos.PacienteDAO;
 import es.uvigo.esei.dagss.dominio.daos.PrescripcionDAO;
 import es.uvigo.esei.dagss.dominio.entidades.Cita;
 import es.uvigo.esei.dagss.dominio.entidades.EstadoCita;
+import es.uvigo.esei.dagss.dominio.entidades.Medicamento;
 import es.uvigo.esei.dagss.dominio.entidades.Medico;
 import es.uvigo.esei.dagss.dominio.entidades.Paciente;
 import es.uvigo.esei.dagss.dominio.entidades.Prescripcion;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -48,9 +53,12 @@ public class GestionPrescripcionesControlador implements Serializable {
     
     @Inject 
     PrescripcionDAO prescripcionDAO;
-
+    
+    @Inject 
+    MedicamentoDAO medicamentoDAO;
+    
     @Inject
-    GestionMedicamentosControlador medicamentosControlador;
+    GestionMedicamentosControlador medicamentoControlador;
     
     @Inject
     MedicoControlador medicoControlador;
@@ -85,6 +93,10 @@ public class GestionPrescripcionesControlador implements Serializable {
         this.prescripcionActual = prescripcionActual;
     }
     
+    public void onSelect(Medicamento medicamento){
+        prescripcionActual.setMedicamento(medicamento);
+    }
+    
     public void doNuevo() {
         prescripcionActual = new Prescripcion(); // Crear prescripción vacía
         // Añadir paciente a la nueva prescripción
@@ -105,18 +117,37 @@ public class GestionPrescripcionesControlador implements Serializable {
         prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
     }
     
+    private boolean fechasValidas() {
+        return (prescripcionActual.getFechaInicio().before(prescripcionActual.getFechaFin()));
+    }
+    
     public void doGuardarNuevo() {
-        // Crea una nueva prescripción
-        prescripcionActual = prescripcionDAO.crear(prescripcionActual);
-        // Actualiza lista de prescripciones del paciente actual
-        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
-
+        if (prescripcionActual.getMedicamento()!=null){
+                if (fechasValidas()) {
+                   // Crea una nueva prescripción
+                   prescripcionActual = prescripcionDAO.crear(prescripcionActual);
+                   // Actualiza lista de prescripciones del paciente actual
+                   prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
+               } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La fecha de finalización de la prescripción debe ser posterior a la fecha de inicio", ""));
+                }
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Por favor, seleccione un medicamento para la nueva prescripción", ""));
+        }
     }
     
     public void doGuardarEditado() {
-          // Actualiza una prescripción
-        prescripcionActual = prescripcionDAO.actualizar(prescripcionActual);
-         // Actualiza lista de prescripciones del paciente actual
-        prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
+          if (prescripcionActual.getMedicamento()!=null){
+                if (fechasValidas()) {
+                    // Actualiza una prescripción
+                  prescripcionActual = prescripcionDAO.actualizar(prescripcionActual);
+                   // Actualiza lista de prescripciones del paciente actual
+                  prescripciones = prescripcionDAO.buscarPorPaciente(gestionCitasActualesControlador.getCitaActual().getPaciente().getId());
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "La fecha de finalización de la prescripción debe ser posterior a la fecha de inicio", ""));
+                }
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Por favor, seleccione un medicamento para editar prescripción", ""));
+        }
     }
 }

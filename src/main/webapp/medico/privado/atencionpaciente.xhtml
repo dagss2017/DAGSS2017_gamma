@@ -32,7 +32,7 @@
                                 <h:outputText value="#{prescripcion.id}"/>
                              </b:dataTableColumn>
                             <b:dataTableColumn label="Medicina">
-                                <h:outputText value="#{prescripcion.medicina}"/>
+                                <h:outputText value="#{prescripcion.medicamento.nombre}"/>
                             </b:dataTableColumn>
                             <b:dataTableColumn label="Dosis">
                                 <h:outputText value="#{prescripcion.dosis}" />
@@ -43,15 +43,19 @@
                             </b:dataTableColumn>
 
                             <b:dataTableColumn label="Fecha Inicio">
-                                  <h:outputText value="#{prescripcion.fechaInicio}" />
+                                  <h:outputText value="#{prescripcion.fechaInicio}">
+                                  <f:convertDateTime pattern="dd/MM/yyyy" locale="es_ES" timeZone="Europe/Madrid"/>
+                            </h:outputText>
                             </b:dataTableColumn>
                             <b:dataTableColumn label="Fecha Fin">
-                                  <h:outputText value="#{prescripcion.fechaInicio}" />
+                                  <h:outputText value="#{prescripcion.fechaFin}" >
+                                  <f:convertDateTime pattern="dd/MM/yyyy" locale="es_ES" timeZone="Europe/Madrid"/>
+                            </h:outputText>
                             </b:dataTableColumn> 
                             <b:dataTableColumn label="" orderable="false">
                                 <b:commandButton id="botonEditar" icon-awesome="pencil" tooltip="Editar prescripción" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEditar(prescripcion)}" 
-                                                 update=":formularioEditar:modalEditar"
+                                                 update=":formularioEditarPrescripcion:modalEditarPrescripcion"
                                                  oncomplete="$('.modal-editarprescripcion-class').modal('show')"/>
                                 <b:commandButton id="botonBorrar" icon-awesome="trash" tooltip="Eliminar prescripción" ajax="true" 
                                                  actionListener="#{GestionPrescripcionesControlador.doEliminar(prescripcion)}"

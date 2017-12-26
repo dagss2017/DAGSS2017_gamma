@@ -22,7 +22,8 @@ public class GestionMedicamentosControlador implements Serializable {
 
     List<Medicamento> medicamentos;
     Medicamento medicamentoActual;
-
+    String filtroMedicamentos;
+    
     public GestionMedicamentosControlador() {
     }
 
@@ -45,6 +46,18 @@ public class GestionMedicamentosControlador implements Serializable {
 
     public void setMedicamentoActual(Medicamento medicamentoActual) {
         this.medicamentoActual = medicamentoActual;
+    }
+    
+    public String getFiltroMedicamentos(){
+        return this.filtroMedicamentos;
+    }
+    
+    public void setFiltroMedicamentos(String filtro){
+        this.filtroMedicamentos = filtro;
+    }
+    
+    public void onFiltrarMedicamentos(){
+        medicamentos = medicamentoDAO.buscarPorFiltro(filtroMedicamentos);
     }
 
     public void doEliminar(Medicamento medicamento) {
